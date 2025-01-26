@@ -1,31 +1,58 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    float yMin = -1.8f;
-    float yMax = -1f;
+    [SerializeField] float yMin = -2.8f;
+    [SerializeField] float yMax = -1f;
+    [SerializeField] float currentPosition;
     [SerializeField] float startDelay;
     [SerializeField] RoomManager roomManager;
     private float speed;
-    bool movingUp = false;
+    [SerializeField] bool movingUp = true;
+    [SerializeField] bool go = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         speed = roomManager.spikeSpeed;
+        currentPosition = yMin;
+        StartCoroutine("delayStart");
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, 
-            Mathf.Lerp(yMin, yMax, speed * Time.deltaTime),
-            transform.position.z);
+        currentPosition = transform.position.y;
+        if (go)
+        {
+            if (currentPosition >= yMax * 1.05f)
+            {
+                movingUp = false;
+            }
+            if (currentPosition <= yMin * .95f)
+            {
+                movingUp = true;
+            }
+            if (movingUp)
+            {
+                transform.position = new Vector3(transform.position.x,
+                    Mathf.Lerp(currentPosition, yMax, speed * Time.deltaTime),
+                    transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x,
+                    Mathf.Lerp(currentPosition, yMin, speed * Time.deltaTime),
+                    transform.position.z);
+            }
+        }
     }
 
-    void toggleMovingUp()
+    IEnumerator delayStart()
     {
-        movingUp = !movingUp;
+        yield return new WaitForSeconds(startDelay);
+        go = true;
     }
 }
