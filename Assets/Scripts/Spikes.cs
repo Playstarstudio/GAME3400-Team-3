@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Splines.Interpolators;
 
 public class Spikes : MonoBehaviour
 {
@@ -38,13 +39,13 @@ public class Spikes : MonoBehaviour
             if (movingUp)
             {
                 transform.position = new Vector3(transform.position.x,
-                    Mathf.Lerp(currentPosition, yMax, speed * Time.deltaTime),
+                    Mathf.Lerp(currentPosition, yMax, speed * 4 * Time.deltaTime),
                     transform.position.z);
             }
             else
             {
                 transform.position = new Vector3(transform.position.x,
-                    Mathf.Lerp(currentPosition, yMin, speed * Time.deltaTime),
+                    Mathf.Lerp(currentPosition, yMin, speed * .5f * Time.deltaTime),
                     transform.position.z);
             }
         }
