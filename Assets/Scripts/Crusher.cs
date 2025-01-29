@@ -52,7 +52,7 @@ public class Crusher : MonoBehaviour
         {
             moveIn = false;
         }
-        if (rightWall.isTouchingPlayer || leftWall.isTouchingPlayer)
+        if (rightWall.isTouchingPlayer && leftWall.isTouchingPlayer)
         {
             Debug.Log("You lose!");
         }
