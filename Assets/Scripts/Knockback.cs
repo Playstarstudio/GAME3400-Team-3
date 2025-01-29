@@ -20,8 +20,8 @@ public class Knockback : MonoBehaviour
 
     private void KnockbackPlayer()
     {
-        playerRigidbody.AddForce(Vector3.up * (knockbackForce / 4), ForceMode.Force);
-        playerRigidbody.AddForce(Vector3.back * knockbackForce, ForceMode.Force);
+        playerRigidbody.AddForce(Vector3.up * (knockbackForce / 4), ForceMode.Impulse);
+        playerRigidbody.AddForce(Vector3.back * knockbackForce, ForceMode.Impulse);
         Debug.Log("Knockback");
     }
 }
