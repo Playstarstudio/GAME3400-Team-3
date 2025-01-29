@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Crusher : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class Crusher : MonoBehaviour
         }
         if (rightWall.isTouchingPlayer && leftWall.isTouchingPlayer)
         {
+            SceneManager.LoadScene("Game Over");
             Debug.Log("You lose!");
         }
     }
