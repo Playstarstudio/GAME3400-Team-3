@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8264567126606421340}
   - component: {fileID: 6925584010665472742}
   - component: {fileID: 2213804417672521749}
+  - component: {fileID: 1381876341498181963}
   m_Layer: 0
   m_Name: RightWall
   m_TagString: Untagged
@@ -373,8 +374,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.41, y: 6.160145, z: 3.37}
-  m_Center: {x: -0.24, y: 0.8599217, z: 0}
+  m_Size: {x: 0.58, y: 4, z: 3.37}
+  m_Center: {x: -0.24, y: 1, z: 0}
+--- !u!114 &1381876341498181963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343577974084902699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084ab386eadfda84287364753d89e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouchingPlayer: 0
+  player: {fileID: 0}
+  playerRigidbody: {fileID: 0}
 --- !u!1 &8762415661788888353
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2278059034589023415}
+  - component: {fileID: -5659563527738787889}
   m_Layer: 0
   m_Name: WallPair
   m_TagString: Untagged
@@ -408,6 +425,28 @@ Transform:
   - {fileID: 8616663584234752007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5659563527738787889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8762415661788888353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0ab8a1c03c00049889f6bed9e6ca40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomManager: {fileID: 0}
+  player: {fileID: 0}
+  playerRigidbody: {fileID: 0}
+  hasStone: 0
+  wallSpeed: 0.1
+  rightPosition: 0
+  leftPosition: 0
+  rightWall: {fileID: 0}
+  leftWall: {fileID: 0}
+  moveIn: 0
 --- !u!1 &8788908261897151652
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +462,7 @@ GameObject:
   - component: {fileID: 6361000256551755328}
   - component: {fileID: 5102718867503292821}
   - component: {fileID: 7517387949842597613}
+  - component: {fileID: 199804234134892108}
   m_Layer: 0
   m_Name: LeftWall
   m_TagString: Untagged
@@ -781,8 +821,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.41, y: 6.160145, z: 3.37}
-  m_Center: {x: 5, y: 0.8599217, z: 0}
+  m_Size: {x: 0.58, y: 4, z: 3.37}
+  m_Center: {x: 5, y: 1, z: 0}
+--- !u!114 &199804234134892108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788908261897151652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084ab386eadfda84287364753d89e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouchingPlayer: 0
+  player: {fileID: 0}
+  playerRigidbody: {fileID: 0}
 --- !u!1001 &2885653435932071686
 PrefabInstance:
   m_ObjectHideFlags: 0
