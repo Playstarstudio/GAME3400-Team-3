@@ -20,7 +20,8 @@ public class MovingWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == playerRigidbody)
+        Debug.Log("Collided with " + other.name);
+        if (other.CompareTag("Player"))
         {
             isTouchingPlayer = true;
         }
@@ -28,9 +29,9 @@ public class MovingWall : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other == playerRigidbody)
+        if (other.CompareTag("Player"))
         {
-            isTouchingPlayer = true;
+            isTouchingPlayer = false;
         }
     }
 }

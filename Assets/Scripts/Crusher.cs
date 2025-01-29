@@ -43,9 +43,9 @@ public class Crusher : MonoBehaviour
     {
         if (moveIn)
         {
-            rightWall.transform.position = new Vector3(rightWall.transform.position.x - wallSpeed,
+            rightWall.transform.position = new Vector3(rightWall.transform.position.x - (wallSpeed * Time.deltaTime),
                 rightWall.transform.position.y, rightWall.transform.position.z);
-            leftWall.transform.position = new Vector3(leftWall.transform.position.x + wallSpeed,
+            leftWall.transform.position = new Vector3(leftWall.transform.position.x + (wallSpeed * Time.deltaTime),
                 leftWall.transform.position.y, leftWall.transform.position.z);
         }
         if (rightCollider.bounds.Intersects(leftCollider.bounds))
