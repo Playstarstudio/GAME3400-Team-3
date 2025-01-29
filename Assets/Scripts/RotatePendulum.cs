@@ -19,8 +19,7 @@ public class RotatePendulum : MonoBehaviour
         {
             float angle = limit * Mathf.Sin(Time.time * speed + startDelay);
             transform.localRotation = Quaternion.Euler(0, 0, angle);
-        }
-            
+        }   
     }
 
     IEnumerator delayStart()
