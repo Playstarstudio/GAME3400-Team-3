@@ -10,26 +10,20 @@ public class RoomManager : MonoBehaviour
     public float pendulumSpeed;
     bool spedUp = false;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
-        upTheAnte();
+        if (hasStone && spedUp == false)
+            upTheAnte();
     }
 
     private void upTheAnte()
     {
-        if (hasStone && spedUp == false)
-        {
-            spikeSpeed = spikeSpeed * speedMult;
-            pendulumSpeed = pendulumSpeed * speedMult;
-            spedUp = true;
-        }
+        spikeSpeed = spikeSpeed * speedMult;
+        pendulumSpeed = pendulumSpeed * speedMult;
+        spedUp = true;
     }
 }

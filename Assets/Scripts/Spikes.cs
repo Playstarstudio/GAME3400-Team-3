@@ -14,17 +14,15 @@ public class Spikes : MonoBehaviour
     [SerializeField] bool movingUp = true;
     [SerializeField] bool go = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        speed = roomManager.spikeSpeed;
         currentPosition = yMin;
         StartCoroutine("delayStart");
     }
 
-    // Update is called once per frame
     void Update()
     {
+        speed = roomManager.spikeSpeed;
         currentPosition = transform.position.y;
         if (go)
         {
