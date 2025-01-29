@@ -13,6 +13,7 @@ public class Spikes : MonoBehaviour
     private float speed;
     [SerializeField] bool movingUp = true;
     [SerializeField] bool go = false;
+    public bool touchedByWall = false;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class Spikes : MonoBehaviour
             {
                 movingUp = true;
             }
-            if (movingUp)
+            if (movingUp && touchedByWall == false)
             {
                 transform.position = new Vector3(transform.position.x,
                     Mathf.Lerp(currentPosition, yMax, speed * 4 * Time.deltaTime),
