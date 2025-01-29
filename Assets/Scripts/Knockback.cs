@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Knockback : MonoBehaviour
@@ -20,8 +21,8 @@ public class Knockback : MonoBehaviour
 
     private void KnockbackPlayer()
     {
-        playerRigidbody.AddForce(Vector3.up * (knockbackForce / 4), ForceMode.Impulse);
-        playerRigidbody.AddForce(Vector3.back * knockbackForce, ForceMode.Impulse);
+        playerRigidbody.AddForce(player.transform.up * (knockbackForce / 4), ForceMode.Impulse);
+        playerRigidbody.AddForce(-player.transform.forward * knockbackForce, ForceMode.Impulse);
         Debug.Log("Knockback");
     }
 }
