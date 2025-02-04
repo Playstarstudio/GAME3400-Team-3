@@ -15,7 +15,7 @@ public class LaserManager : MonoBehaviour
     public void Activate()
     {
         
-        for (int i = 0; i < laserOrder.Count; i++)
+        for (int i = 0; i < 6; i++)
         {
             laserOrder[i].Activate();
                 

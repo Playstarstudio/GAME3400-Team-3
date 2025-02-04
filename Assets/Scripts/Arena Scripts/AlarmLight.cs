@@ -32,8 +32,7 @@ public class AlarmLight : MonoBehaviour
             renderer.material.color = Color.Lerp(color1, color2, step);
         }
 
-        StartDelay(30);
-        isActive = false;
+        StartDelay(10);
     }
     
     void StartDelay(float delayTime)
@@ -45,7 +44,7 @@ public class AlarmLight : MonoBehaviour
     {
         //Wait for the specified delay time before continuing.
         yield return new WaitForSeconds(delayTime);
-
+        isActive = false;
         //Do the action after the delay time has finished.
     }
 }
