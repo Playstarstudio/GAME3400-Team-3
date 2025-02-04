@@ -10,12 +10,16 @@ public class LaserArray : MonoBehaviour
     
     [SerializeField] private List<AlarmLight> lights = new List<AlarmLight>();
 
+    [SerializeField] private AudioSource alarm;
+    
+
     public void Activate()
     {
         for (int i = 0; i < lasers.Count; i++)
         {
-            lasers[i].Activate();
+            //alarm.Play();
             lights[i].Activate();
+            lasers[i].Activate();
             if (i == lasers.Count - 1)
             {
                 i = 0;

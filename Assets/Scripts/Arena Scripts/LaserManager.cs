@@ -12,7 +12,7 @@ public class LaserManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Activate()
     {
         
         for (int i = 0; i < laserOrder.Count; i++)
