@@ -20,10 +20,6 @@ public class LaserArray : MonoBehaviour
             //alarm.Play();
             lights[i].Activate();
             lasers[i].Activate();
-            if (i == lasers.Count - 1)
-            {
-                i = 0;
-            }
                 
         }
     }

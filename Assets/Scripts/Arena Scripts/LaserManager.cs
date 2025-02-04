@@ -18,10 +18,6 @@ public class LaserManager : MonoBehaviour
         for (int i = 0; i < laserOrder.Count; i++)
         {
             laserOrder[i].Activate();
-            if (i == laserOrder.Count - 1)
-            {
-                i = 0;
-            }
                 
         }
         
