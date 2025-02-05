@@ -8,7 +8,7 @@ public class LaserArray : MonoBehaviour
              "the light in the order of the list")]
     [SerializeField] private List<Laser> lasers = new List<Laser>();
     
-    [SerializeField] private List<AlarmLight> lights = new List<AlarmLight>();
+    [SerializeField] private List<Alarm> alarms = new List<Alarm>();
 
     [SerializeField] private AudioSource alarm;
     
@@ -18,7 +18,7 @@ public class LaserArray : MonoBehaviour
         for (int i = 0; i < lasers.Count; i++)
         {
             //alarm.Play();
-            lights[i].Activate();
+            alarms[i].Activate();
             lasers[i].Activate();
                 
         }

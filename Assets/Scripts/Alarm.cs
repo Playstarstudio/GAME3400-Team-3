@@ -32,4 +32,9 @@ public class Alarm : MonoBehaviour
             }
         }
     }
+
+    public void Activate()
+    {
+        active = true;
+    }
 }
