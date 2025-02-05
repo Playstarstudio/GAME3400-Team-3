@@ -15,24 +15,29 @@ public class LaserManager : MonoBehaviour
     public void Activate()
     {
         TurnOnLaserWall(0);
-		StartDelay(5, 0); 
     }
 
     public void TurnOnLaserWall(int laserIndex) 
 	{
+		if (laserIndex == laserOrder.Count) 
+         	{
+           laserIndex = 0;
+			}
 		laserOrder[laserIndex].Activate();
+		StartDelay(5, laserIndex, laserIndex + 1); 
     }
 
-    void StartDelay(float delayTime, int index)
+    void StartDelay(float delayTime, int index, int nextIndex)
     {
-        StartCoroutine(Delay(delayTime, index));
+        StartCoroutine(Delay(delayTime, index, nextIndex));
     }
 
-    IEnumerator Delay(float delayTime, int index)
+    IEnumerator Delay(float delayTime, int index, int nextIndex)
     {
         //Wait for the specified delay time before continuing.
         yield return new WaitForSeconds(delayTime);
         //Do the action after the delay time has finished.
 		laserOrder[index].Deactivate();
+        TurnOnLaserWall(nextIndex);
     }
 }
