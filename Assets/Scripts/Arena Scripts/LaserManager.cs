@@ -14,26 +14,25 @@ public class LaserManager : MonoBehaviour
     // Update is called once per frame
     public void Activate()
     {
-        
-        for (int i = 0; i < laserOrder.Count; i++)
-        {
-            laserOrder[i].Activate();
-			StartDelay(30);
-			laserOrder[i].Deactivate();
-        }
-        
+        TurnOnLaserWall(0);
+		StartDelay(5, 0); 
     }
 
-    void StartDelay(float delayTime)
+    public void TurnOnLaserWall(int laserIndex) 
+	{
+		laserOrder[laserIndex].Activate();
+    }
+
+    void StartDelay(float delayTime, int index)
     {
-        StartCoroutine(Delay(delayTime));
+        StartCoroutine(Delay(delayTime, index));
     }
 
-    IEnumerator Delay(float delayTime)
+    IEnumerator Delay(float delayTime, int index)
     {
         //Wait for the specified delay time before continuing.
         yield return new WaitForSeconds(delayTime);
         //Do the action after the delay time has finished.
-		
+		laserOrder[index].Deactivate();
     }
 }

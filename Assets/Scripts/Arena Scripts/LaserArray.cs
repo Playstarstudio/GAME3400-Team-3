@@ -19,7 +19,7 @@ public class LaserArray : MonoBehaviour
         {
             //alarm.Play();
             alarms[i].Activate();
-            lasers[i].Activate();
+            StartDelay(2, i);
                 
         }
     }
@@ -29,8 +29,21 @@ public class LaserArray : MonoBehaviour
         for (int i = 0; i < lasers.Count; i++)
         {
             //alarm.Stop();
-            lasers[i].Deactivate();
+            lasers[i].gameObject.SetActive(false);
                 
         }
+    }
+
+    void StartDelay(float delayTime, int index)
+    {
+        StartCoroutine(Delay(delayTime, index));
+    }
+
+    IEnumerator Delay(float delayTime, int index)
+    {
+        //Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        //Do the action after the delay time has finished.
+		lasers[index].gameObject.SetActive(true);
     }
 }

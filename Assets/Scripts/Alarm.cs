@@ -31,7 +31,7 @@ public class Alarm : MonoBehaviour
             {
                 l.intensity = 50;
             }
-			StartDelay(10);
+			StartDelay(2);
         }
     }
 
