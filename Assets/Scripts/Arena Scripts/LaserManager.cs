@@ -15,11 +15,25 @@ public class LaserManager : MonoBehaviour
     public void Activate()
     {
         
-        for (int i = 0; i < laserOrder.size(); i++)
+        for (int i = 0; i < laserOrder.Count; i++)
         {
             laserOrder[i].Activate();
-                
+			StartDelay(30);
+			laserOrder[i].Deactivate();
         }
         
+    }
+
+    void StartDelay(float delayTime)
+    {
+        StartCoroutine(Delay(delayTime));
+    }
+
+    IEnumerator Delay(float delayTime)
+    {
+        //Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        //Do the action after the delay time has finished.
+		
     }
 }

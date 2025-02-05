@@ -23,4 +23,14 @@ public class LaserArray : MonoBehaviour
                 
         }
     }
+
+	public void Deactivate()
+    {
+        for (int i = 0; i < lasers.Count; i++)
+        {
+            //alarm.Stop();
+            lasers[i].Deactivate();
+                
+        }
+    }
 }

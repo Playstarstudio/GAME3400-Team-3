@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Alarm : MonoBehaviour
 {
@@ -30,11 +31,34 @@ public class Alarm : MonoBehaviour
             {
                 l.intensity = 50;
             }
+			StartDelay(10);
         }
     }
 
     public void Activate()
     {
         active = true;
+    }
+
+	public void Deactivate() 
+	{
+        active = false;
+	foreach (Light l in this.GetComponentsInChildren<Light>())
+        {
+            l.intensity = 0;
+        }
+	}
+
+void StartDelay(float delayTime)
+    {
+        StartCoroutine(Delay(delayTime));
+    }
+
+    IEnumerator Delay(float delayTime)
+    {
+        //Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        //Do the action after the delay time has finished.
+		Deactivate();
     }
 }
