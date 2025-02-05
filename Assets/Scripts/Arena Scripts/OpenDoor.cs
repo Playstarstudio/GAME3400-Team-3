@@ -3,17 +3,19 @@ using UnityEngine.UI;
 public class OpenDoor : MonoBehaviour
 {
     public GameObject uiObject;
-    
-    private Animator animator;
 
     private bool playerInRange;
 
+	[SerializeField] private GameObject door;
+	
+	[SerializeField] private GameObject startPosition;
+
+	[SerializeField] private GameObject endPosition;
+
+
     void Start()
     {
-        uiObject.SetActive(false);
         playerInRange = false;
-        animator = GetComponent<Animator>();
-        animator.SetTrigger("Idle Door");
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,7 +28,6 @@ public class OpenDoor : MonoBehaviour
 
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            animator.SetTrigger("Door Animation");
             AnimateDoor();
         }
 
