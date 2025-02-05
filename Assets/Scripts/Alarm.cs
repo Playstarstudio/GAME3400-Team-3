@@ -3,21 +3,33 @@ using UnityEngine;
 public class Alarm : MonoBehaviour
 {
     public bool active;
-    private float angl = 0.0f;
+    private float angl;
+    private float angly;
+    private float anglz;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        angl = transform.rotation.eulerAngles.x;
+        angly = transform.rotation.eulerAngles.y;
+        anglz = transform.rotation.eulerAngles.z;
+        foreach (Light l in this.GetComponentsInChildren<Light>())
+        {
+            l.intensity = 0;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (active)
+        if (active)
         {
-            transform.rotation = Quaternion.Euler(angl, 0.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(angl, angly, anglz);
             angl += 3.0f;
+            foreach (Light l in this.GetComponentsInChildren<Light>())
+            {
+                l.intensity = 50;
+            }
         }
     }
 }
