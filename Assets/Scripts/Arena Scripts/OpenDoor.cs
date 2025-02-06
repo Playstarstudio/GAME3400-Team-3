@@ -19,6 +19,7 @@ public class OpenDoor : MonoBehaviour
         playerInRange = false;
         startPosn = startPosition.transform;
         endPosn = endPosition.transform;
+        door.transform.position = startPosn.position;
     }
 
     void Update()
