@@ -17,9 +17,9 @@ public class LaserArray : MonoBehaviour
     {
         for (int i = 0; i < lasers.Count; i++)
         {
-            //alarm.Play();
+            alarm.Play();
             alarms[i].Activate();
-            StartDelay(2, i);
+            StartDelay(3, i);
                 
         }
     }
