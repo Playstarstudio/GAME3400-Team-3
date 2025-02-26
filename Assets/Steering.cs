@@ -23,7 +23,7 @@ public class Steering : MonoBehaviour
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        
+        Debug.Log("InitialXposition: " + initialXPosition);
         // Check if we're outside bounds regardless of input
         if (transform.position.x < initialXPosition - maxSlideDistance)
         {
@@ -37,7 +37,7 @@ public class Steering : MonoBehaviour
             if (velocity.x < 0) velocity.x = 0;
             rb.linearVelocity = velocity;
         }
-        else if (transform.position.z > initialXPosition + maxSlideDistance)
+        else if (transform.position.x > initialXPosition + maxSlideDistance)
         {
             // If we're beyond the right boundary
             Vector3 position = transform.position;
