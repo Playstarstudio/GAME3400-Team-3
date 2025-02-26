@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.3556743, g: 0, b: 0.5660378, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.005
+  m_FogDensity: 0.008
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -8142,6 +8142,42 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &535813306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9055549595442596753, guid: 5bc8f61e6a72da94fa3650d2f18cf375, type: 3}
+  m_PrefabInstance: {fileID: 6348264623787386457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &535813311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535813306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd64e0bdffa9d04da5170da3f04b771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShaking: 0
+  timeDelay: 0.1
+  shakeMin: 0.98
+  shakeMax: 1.02
+--- !u!114 &535813312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535813306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!43 &543501049
 Mesh:
   m_ObjectHideFlags: 0
@@ -44657,6 +44693,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 980687053951938391, guid: 5bc8f61e6a72da94fa3650d2f18cf375, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1982302788}
+    - targetCorrespondingSourceObject: {fileID: 9055549595442596753, guid: 5bc8f61e6a72da94fa3650d2f18cf375, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 535813312}
+    - targetCorrespondingSourceObject: {fileID: 9055549595442596753, guid: 5bc8f61e6a72da94fa3650d2f18cf375, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 535813311}
   m_SourcePrefab: {fileID: 100100000, guid: 5bc8f61e6a72da94fa3650d2f18cf375, type: 3}
 --- !u!1001 &8847239281034596174
 PrefabInstance:
