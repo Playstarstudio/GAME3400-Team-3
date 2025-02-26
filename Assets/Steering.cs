@@ -5,12 +5,12 @@ public class Steering : MonoBehaviour
     public float slideSpeed = 30f;
     public float maxSlideDistance = 5f;
     
-    private float initialZPosition;
+    private float initialXPosition;
     private Rigidbody rb;
     
     void Start()
     {
-        initialZPosition = transform.position.z;
+        initialXPosition = transform.position.x;
         rb = GetComponent<Rigidbody>();
         
         if (rb == null)
@@ -25,28 +25,28 @@ public class Steering : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         
         // Check if we're outside bounds regardless of input
-        if (transform.position.z < initialZPosition - maxSlideDistance)
+        if (transform.position.x < initialXPosition - maxSlideDistance)
         {
             // If we're beyond the left boundary
             Vector3 position = transform.position;
-            position.z = initialZPosition - maxSlideDistance;
+            position.x = initialXPosition - maxSlideDistance;
             transform.position = position;
             
             // Stop movement in that direction
             Vector3 velocity = rb.linearVelocity;
-            if (velocity.z < 0) velocity.z = 0;
+            if (velocity.x < 0) velocity.x = 0;
             rb.linearVelocity = velocity;
         }
-        else if (transform.position.z > initialZPosition + maxSlideDistance)
+        else if (transform.position.z > initialXPosition + maxSlideDistance)
         {
             // If we're beyond the right boundary
             Vector3 position = transform.position;
-            position.z = initialZPosition + maxSlideDistance;
+            position.x = initialXPosition + maxSlideDistance;
             transform.position = position;
             
             // Stop movement in that direction
             Vector3 velocity = rb.linearVelocity;
-            if (velocity.z > 0) velocity.z = 0;
+            if (velocity.x > 0) velocity.x = 0;
             rb.linearVelocity = velocity;
         }
         
@@ -54,7 +54,7 @@ public class Steering : MonoBehaviour
         if (horizontalInput != 0)
         {
             // Use force for movement
-            Vector3 movement = new Vector3(0, 0, horizontalInput);
+            Vector3 movement = new Vector3(horizontalInput, 0,0 );
             rb.AddForce(movement * slideSpeed);
         }
     }
