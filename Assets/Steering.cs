@@ -23,7 +23,7 @@ public class Steering : MonoBehaviour
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log("InitialXposition: " + initialXPosition);
+        
         // Check if we're outside bounds regardless of input
         if (transform.position.x < initialXPosition - maxSlideDistance)
         {
