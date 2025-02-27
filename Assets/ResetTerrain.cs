@@ -9,6 +9,6 @@ public class ResetTerrain : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player"))
-        terrain.position = new Vector3(terrain.position.x, terrain.position.y, terrain.position.z + 500);
+        terrain.position = new Vector3(terrain.position.x, terrain.position.y, terrain.position.z + 460);
     }
 }

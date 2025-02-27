@@ -24,6 +24,9 @@ public class Steering : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         
+        if (!Input.anyKeyDown) {
+            rb.linearVelocity = Vector3.zero;
+        }
         // Check if we're outside bounds regardless of input
         if (transform.position.x < initialXPosition - maxSlideDistance)
         {
