@@ -4,11 +4,11 @@ public class ResetTerrain : MonoBehaviour
 {
     public Transform terrain;
 
+    public TerrainManager manager;
 
-  
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player"))
-        terrain.position = new Vector3(terrain.position.x, terrain.position.y, terrain.position.z + 460);
+        manager.MoveTerrain();
     }
 }
