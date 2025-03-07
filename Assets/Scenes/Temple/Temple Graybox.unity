@@ -53249,6 +53249,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &658607682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 377570194583825845, guid: e59c75f73b1a94e1e869782d2688a5f0, type: 3}
+  m_PrefabInstance: {fileID: 1209468846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &658607690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5063025157883875198, guid: e59c75f73b1a94e1e869782d2688a5f0, type: 3}
@@ -56006,6 +56011,7 @@ Transform:
   - {fileID: 1577099627}
   - {fileID: 1776893625}
   - {fileID: 47739436}
+  - {fileID: 1450635757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &835924572
@@ -64480,6 +64486,76 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1450635756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1450635757}
+  - component: {fileID: 1450635759}
+  - component: {fileID: 1450635758}
+  m_Layer: 0
+  m_Name: PickUp Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1450635757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450635756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.83, z: -2.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 829461672}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450635758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450635756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544dcdbdc898c484b872c5088758add3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiObject: {fileID: 0}
+  completedStaff: {fileID: 818827876746973879, guid: 1aecede0359d841cf957fa0f9953dd31, type: 3}
+  roomManager: {fileID: 0}
+  playerStaff: {fileID: 658607682}
+--- !u!65 &1450635759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450635756}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.8146696, y: 3.075868, z: 2.3017197}
+  m_Center: {x: 0.03709483, y: 1.037934, z: -0.2960739}
 --- !u!43 &1462697961
 Mesh:
   m_ObjectHideFlags: 0
