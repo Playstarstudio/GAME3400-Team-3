@@ -30,6 +30,7 @@ public class PickUpGem : MonoBehaviour
             SwapStaffs(playerStaff, completedStaff);
             Destroy(gemstone);
             Destroy(uiObject);
+            roomManager.hasGem = true;
             //Disables script
             Destroy(trigger);
         }
