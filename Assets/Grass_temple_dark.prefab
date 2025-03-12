@@ -50,7 +50,8 @@ LODGroup:
   m_LODs:
   - screenRelativeHeight: 0.6
     fadeTransitionWidth: 0
-    renderers: []
+    renderers:
+    - renderer: {fileID: 9065736818801034342}
   - screenRelativeHeight: 0.070342936
     fadeTransitionWidth: 0
     renderers:
@@ -73,7 +74,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7891673541220712201
 Transform:
   m_ObjectHideFlags: 0
@@ -120,7 +121,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc79373f513b94341a07e0b1e056d2a7, type: 2}
+  - {fileID: -876546973899608171, guid: 067193134ede9fe4790b256ba210821f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
