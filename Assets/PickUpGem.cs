@@ -7,6 +7,7 @@ public class PickUpGem : MonoBehaviour
     [SerializeField] private GameObject completedStaff;
     [SerializeField] private RoomManager7 roomManager;
     [SerializeField] private GameObject playerStaff;
+    [SerializeField] private GameObject storm;
     private Transform staffTransform;
 
     private bool playerInRange;
@@ -33,6 +34,7 @@ public class PickUpGem : MonoBehaviour
             roomManager.hasGem = true;
             //Disables script
             Destroy(trigger);
+            Destroy(storm);
         }
 
     }
