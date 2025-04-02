@@ -1,26 +1,29 @@
 using UnityEngine;
+using StarterAssets;
 
 public class GravityArea : MonoBehaviour
 {
-    public CharacterController controller;
+    private float originalGravity;
+    private FirstPersonController playerController;
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (controller != null && rb != null)
+        playerController = other.GetComponent<FirstPersonController>();
+        if (playerController != null)
         {
-            controller.Gravity = 0.1f;
-            rb.AddForce(Vector3.up, ForceMode.Acceleration);
+            playerController.isGravityEnabled = false;
+            playerController.Gravity = 1f;
+            playerController.GetComponent<CharacterController>().Move(Vector3.up * 1f);
+
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (controller != null && rb != null)
+        if (playerController != null)
         {
-            controller.Gravity = -15f;
-            rb.linearVelocity = Vector3.zero;
+            playerController.Gravity = -15f;
+            playerController.isGravityEnabled = true;
         }
     }
 }
