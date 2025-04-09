@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6176608314918279532}
+  - component: {fileID: 8012483274559829277}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   - {fileID: 3475346522584143236}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012483274559829277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662847723982512064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9652bc0a57f7f3f4988306786013ac99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfPos: {x: 0, y: 0, z: 0}
+  rotationX: 0
+  rotationY: 0
+  rotationZ: 0
 --- !u!1 &1914642203942078769
 GameObject:
   m_ObjectHideFlags: 0
