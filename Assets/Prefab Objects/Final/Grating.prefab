@@ -18856,6 +18856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5574669887569091691}
+  - component: {fileID: 3488168748592933017}
   m_Layer: 0
   m_Name: Grating
   m_TagString: Untagged
@@ -19096,6 +19097,27 @@ Transform:
   - {fileID: 7863702583986834773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3488168748592933017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760330632156713502}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 17.788729, y: 0.58213466, z: 3.6525128}
+  m_Center: {x: -2.964759, y: -0.20893267, z: -0.26554754}
 --- !u!1 &1768778528548444833
 GameObject:
   m_ObjectHideFlags: 0
