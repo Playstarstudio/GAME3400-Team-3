@@ -251,10 +251,8 @@ MonoBehaviour:
   m_VersionIndex: 2775
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 2
-    b: 0
-  m_SelectedVertices: 0200000000000000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &7611367318720592806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,6 +467,30 @@ PrefabInstance:
     - target: {fileID: 4083501151425157549, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -60.510002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -68.31571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: -15.689165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306643203051859313, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6745302439343835087, guid: bcc37d058933b774c939b35fa0ed524f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
