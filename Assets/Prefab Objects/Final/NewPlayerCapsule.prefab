@@ -125,14 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49b71da7c5eda24a82c7d681391be39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandGlow: 0
-  HandGlowL: {fileID: 0}
-  HandGlowR: {fileID: 0}
-  landingEffectL: {fileID: 0}
-  landingEffectR: {fileID: 0}
   rb: {fileID: 0}
   groundedObject: {fileID: 0}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 7996897316998982675}
   groundedPlayerRotation: {x: 0, y: 0, z: 0, w: 0}
   groundedCameraRotation: {x: 0, y: 0, z: 0, w: 0}
   anim: {fileID: 0}
@@ -209,7 +204,7 @@ GameObject:
   - component: {fileID: 3940650568246056988}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

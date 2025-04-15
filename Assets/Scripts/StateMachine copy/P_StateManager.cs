@@ -8,7 +8,7 @@ public class P_StateManager : MonoBehaviour
     #region States
     public P_State currentState;
     public P_State previousState;
-    public P_FlyingState flyingState = new P_FlyingState();
+    public P_Walking walkingState = new P_Walking();
     public P_GroundedState groundedState = new P_GroundedState();
     #endregion
 
@@ -125,9 +125,6 @@ public class P_StateManager : MonoBehaviour
             mainCamera.localRotation = Quaternion.Euler(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y, 0f);
         }
 
-        // Update Audio Volumes
-        crawlingAudioSource.volume = isCrawling ? 1f : 0f;
-        grabbingAudioSource.volume = isGrabbing ? 1f : 0f;
     }
 
 
