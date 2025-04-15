@@ -4,24 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class P_StateManager : MonoBehaviour
 {
-    #region Hand Glow
-    public bool HandGlow = false;
-    public ParticleSystem HandGlowL;
-    public ParticleSystem HandGlowR;
-    public ParticleSystem landingEffectL;
-    public ParticleSystem landingEffectR;
-    #endregion
 
     #region States
     public P_State currentState;
     public P_State previousState;
     public P_FlyingState flyingState = new P_FlyingState();
     public P_GroundedState groundedState = new P_GroundedState();
-    public P_GrabbingState grabbingState = new P_GrabbingState();
-    public P_AimingState aimingState = new P_AimingState();
-    public P_PushingState pushingState = new P_PushingState();
-    public P_DialogueState dialogueState = new P_DialogueState();
-    public P_PausedState pausedState = new P_PausedState();
     #endregion
 
     #region Components
@@ -68,8 +56,6 @@ public class P_StateManager : MonoBehaviour
     #endregion
 
     #region UI Elements
-    public OxygenSlideBar oxygenSlideBar;
-    public PowerSlideBar powerSlideBar;
     public CanvasGroup fadePanel;
     #endregion
 
@@ -85,9 +71,6 @@ public class P_StateManager : MonoBehaviour
 
         mainCamera = transform.Find("Main Camera");
 
-        // Initialize UI
-        UpdateOxygenUI();
-        UpdatePowerUI();
         
         // Initialize audio sources
         breathingAudioSource = gameObject.AddComponent<AudioSource>();
@@ -134,17 +117,6 @@ public class P_StateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
         
-        // Hand Glow Logic
-        if (HandGlow == false)
-        {
-            HandGlowL.Stop();
-            HandGlowR.Stop();
-        }
-        else
-        {
-            HandGlowL.Play();
-            HandGlowR.Play();
-        }
 
         // Lock Camera Rotation on Z-axis
         if (mainCamera != null)
@@ -153,25 +125,8 @@ public class P_StateManager : MonoBehaviour
             mainCamera.localRotation = Quaternion.Euler(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y, 0f);
         }
 
-        // Oxygen Logic
-        if (oxygen > 0f)
-        {
-            oxygen -= oxygenConsumptionRate * Time.deltaTime;
-            oxygen = Mathf.Clamp(oxygen, 0f, 100f);
-            UpdateOxygenUI();
-
-            // Adjust breathing sound volume
-            breathingAudioSource.volume = oxygen < 20f ? 0.3f : 0.1f;
-        }
-        else if (!isSuffocating)
-        {
-            StartCoroutine(SuffocationSequence());
-            isSuffocating = true;
-        }
-
         // Update Audio Volumes
         crawlingAudioSource.volume = isCrawling ? 1f : 0f;
-        oxygenBoostingAudioSource.volume = isBoosting ? 1f : 0f;
         grabbingAudioSource.volume = isGrabbing ? 1f : 0f;
     }
 
@@ -205,49 +160,12 @@ public class P_StateManager : MonoBehaviour
     public void SetPower(float amount)
     {
         power = Mathf.Clamp(amount, 0f, 100f); // Ensure power stays within 0-100
-        UpdatePowerUI();
     }
 
-    /// <summary>
-    /// Public method to add oxygen.
-    /// </summary>
-    /// <param name="amount">Amount of oxygen to add (can be negative).</param>
-    public void AddOxygen(float amount)
-    {
-        oxygen += amount;
-        oxygen = Mathf.Clamp(oxygen, 0f, 100f); // Ensure oxygen stays within 0-100
-        UpdateOxygenUI();
-    }
+    
 
-    /// <summary>
-    /// Updates the oxygen bar in the UI.
-    /// </summary>
-    public void UpdateOxygenUI()
-    {
-        if (oxygenSlideBar != null)
-        {
-            oxygenSlideBar.SetOxygen(oxygen);
-        }
-        else
-        {
-            Debug.LogWarning("OxygenSlideBar not assigned in the Inspector.");
-        }
-    }
+  
 
-    /// <summary>
-    /// Updates the power bar in the UI.
-    /// </summary>
-    public void UpdatePowerUI()
-    {
-        if (powerSlideBar != null)
-        {
-            powerSlideBar.SetPower(power);
-        }
-        else
-        {
-            Debug.LogWarning("PowerSlideBar not assigned in the Inspector.");
-        }
-    }
     
     private IEnumerator PlayBreathingSound()
     {

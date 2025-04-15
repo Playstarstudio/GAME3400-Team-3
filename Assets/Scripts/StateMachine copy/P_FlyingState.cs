@@ -6,8 +6,7 @@ public class P_FlyingState : P_State
 {
     public override void EnterState(P_StateManager player)
     {
-        player.rb.drag = player.drag;
-        player.HandGlow = false;
+        player.rb.linearDamping = player.drag;
         // Reset camera angle form Grounded, Aiming or Pushing
         player.mainCamera.localRotation = Quaternion.identity;
 
@@ -73,7 +72,6 @@ public class P_FlyingState : P_State
 
             
             player.oxygen = Mathf.Clamp(player.oxygen, 0f, 100f);      // Ensure oxygen stays in bounds
-            player.UpdateOxygenUI();
         }
         else
         {
@@ -117,11 +115,7 @@ public class P_FlyingState : P_State
         // Drag
         ApplyDrag(player);
 
-        // State transition
-        if (Input.GetMouseButton(0))
-        {
-            player.SwitchState(player.grabbingState);
-        }
+        
     }
 
     public override void ExitState(P_StateManager player)
@@ -132,7 +126,7 @@ public class P_FlyingState : P_State
 
     private void ApplyDrag(P_StateManager player)
     {
-        Vector3 velocity = player.rb.velocity;
+        Vector3 velocity = player.rb.linearVelocity;
         Vector3 deceleration = -velocity.normalized * player.drag * Time.deltaTime;
 
         if (deceleration.magnitude > velocity.magnitude)
