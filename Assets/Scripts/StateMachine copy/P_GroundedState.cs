@@ -69,7 +69,6 @@ public class P_GroundedState : P_State
             player.rb.isKinematic = false;
             player.rb.AddForce(oppositeDirection * boostForce, ForceMode.VelocityChange);
 
-            player.SwitchState(player.flyingState);
             return;
         }
 

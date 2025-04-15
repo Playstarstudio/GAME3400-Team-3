@@ -64,7 +64,6 @@ public class P_StateManager : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
-        currentState = flyingState;
 
         currentState.EnterState(this);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
