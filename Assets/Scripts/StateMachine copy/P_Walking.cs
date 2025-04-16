@@ -3,7 +3,7 @@ using UnityEngine;
 public class P_Walking : P_State
 {
     float speed;
-    public float jumpHeight = 0.4f;
+    public float jumpHeight = 0f;
     public float gravity = 9.81f;
 
     public float airControl = 10f;
@@ -11,6 +11,8 @@ public class P_Walking : P_State
     Vector3 input;
     Vector3 moveDirection;
     CharacterController controller;
+
+    Transform transform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,35 +34,12 @@ public class P_Walking : P_State
         player.characterController.enabled = true;
         speed = player.moveSpeed;
         controller = player.characterController;
+        transform = player.transform;
     }
 
     public override void UpdateState(P_StateManager player)
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        input = new Vector3(moveHorizontal, moveVertical, 0f).normalized;
-
-        if (controller.isGrounded)
-        {
-            moveDirection = input;
-
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
-            }
-            else
-            {
-                moveDirection.y = 0.0f;
-            }
-        }
-        else
-        {
-            input.y = moveDirection.y;
-            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
-        }
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * speed * Time.deltaTime);
+        Move();
     }
 
     public override void ExitState(P_StateManager player)
@@ -68,4 +47,32 @@ public class P_Walking : P_State
         player.isWalking = false;
         player.characterController.enabled = false;
     }
+
+    private void Move()
+	{
+    
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        input = transform.right * moveHorizontal + transform.forward * moveVertical;
+        input.Normalize();
+
+        if(controller.isGrounded) {
+            moveDirection = input;
+
+            if (Input.GetButton("Jump")) {
+                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+            }
+            else {
+                moveDirection.y = 0.0f;
+            }
+        }
+        else {
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * speed * Time.deltaTime);
+    }
+    
 }

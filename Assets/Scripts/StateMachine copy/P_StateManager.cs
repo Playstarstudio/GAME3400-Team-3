@@ -46,6 +46,7 @@ public class P_StateManager : MonoBehaviour
     public bool isInZeroGrav = false;
 
     public bool isBoosting = false;
+    public bool hasSuit = false;
     #endregion
 
     #region UI Elements
@@ -58,6 +59,9 @@ public class P_StateManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+
+
+
         currentState = walkingState;
 
         currentState.EnterState(this);
