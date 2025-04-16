@@ -31,6 +31,7 @@ public class P_Walking : P_State
         player.isWalking = true;
         player.characterController.enabled = true;
         speed = player.moveSpeed;
+        controller = player.characterController;
     }
 
     public override void UpdateState(P_StateManager player)

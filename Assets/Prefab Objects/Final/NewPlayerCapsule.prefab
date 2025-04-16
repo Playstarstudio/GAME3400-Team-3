@@ -127,42 +127,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  characterController: {fileID: 0}
   groundedObject: {fileID: 0}
   mainCamera: {fileID: 7996897316998982675}
   groundedPlayerRotation: {x: 0, y: 0, z: 0, w: 0}
   groundedCameraRotation: {x: 0, y: 0, z: 0, w: 0}
   anim: {fileID: 0}
-  laser: {fileID: 0}
   breathingAudioSource: {fileID: 0}
   backgroundMusicAudioSource: {fileID: 0}
-  crawlingAudioSource: {fileID: 0}
-  oxygenBoostingAudioSource: {fileID: 0}
-  grabbingAudioSource: {fileID: 0}
   otherSoundsAudioSource: {fileID: 0}
+  jetPackAirSoundClip: {fileID: 0}
   breathingClips: []
   backgroundMusicClips: []
-  idCardClip: {fileID: 0}
-  laserCutterClip: {fileID: 0}
-  sealantSprayClip: {fileID: 0}
-  oxygenRefillClip: {fileID: 0}
   landingClip: {fileID: 0}
-  crawlingClip: {fileID: 0}
-  oxygenBoostingClip: {fileID: 0}
-  grabbingClip: {fileID: 0}
-  suffocationClip: {fileID: 0}
   jumpClip: {fileID: 0}
   moveSpeed: 10
   rotationSpeed: 500
   rollSpeed: 50
   acceleration: 50
   drag: 0.2
-  oxygen: 100
-  power: 0
-  oxygenConsumptionRate: 0.2
   boostMult: 0
-  isCrawling: 0
+  isWalking: 0
+  isInZeroGrav: 0
   isBoosting: 0
-  isGrabbing: 0
   fadePanel: {fileID: 0}
 --- !u!54 &4674528066840632072
 Rigidbody:
@@ -228,8 +215,9 @@ GameObject:
   - component: {fileID: 7846203297418143497}
   - component: {fileID: 4694924203429272499}
   - component: {fileID: 3940650568246056988}
+  - component: {fileID: 6896409695603326352}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,3 +341,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &6896409695603326352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354847799342974098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbb21c1c8fc54439a92a17be29574ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 100
+  minPitch: -90
+  maxPitch: 90

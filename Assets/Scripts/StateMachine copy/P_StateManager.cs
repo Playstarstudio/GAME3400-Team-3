@@ -9,8 +9,6 @@ public class P_StateManager : MonoBehaviour
     public P_State currentState;
     public P_State previousState;
     public P_Walking walkingState = new P_Walking();
-    public P_GroundedState groundedState = new P_GroundedState();
-    public P_FlyingState flyingState = new P_FlyingState();
     public P_ZeroGravityState zeroGravState = new P_ZeroGravityState();
     #endregion
 
@@ -60,6 +58,7 @@ public class P_StateManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+        currentState = walkingState;
 
         currentState.EnterState(this);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -79,8 +78,8 @@ public class P_StateManager : MonoBehaviour
         otherSoundsAudioSource = gameObject.AddComponent<AudioSource>();
         otherSoundsAudioSource.loop = false;
 
-        StartCoroutine(PlayBreathingSound());
-        StartCoroutine(PlayBackgroundMusic());
+//        StartCoroutine(PlayBreathingSound());
+ //       StartCoroutine(PlayBackgroundMusic());
 
         if (mainCamera == null)
         {
