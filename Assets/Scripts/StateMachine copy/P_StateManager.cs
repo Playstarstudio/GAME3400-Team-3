@@ -14,6 +14,7 @@ public class P_StateManager : MonoBehaviour
 
     #region Components
     [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Transform groundedObject;
     public Transform mainCamera;
     [HideInInspector] public Quaternion groundedPlayerRotation;
@@ -28,6 +29,7 @@ public class P_StateManager : MonoBehaviour
     public AudioSource grabbingAudioSource;
     public AudioSource otherSoundsAudioSource;
 
+    public AudioClip jetPackAirSoundClip;
     public AudioClip[] breathingClips;
     public AudioClip[] backgroundMusicClips;
     public AudioClip idCardClip, laserCutterClip, sealantSprayClip, oxygenRefillClip,
@@ -49,6 +51,8 @@ public class P_StateManager : MonoBehaviour
     public float oxygenConsumptionRate = 0.2f; // Amount of oxygen to consume per second
     public float boostMult = 0f;
     private Coroutine oxygenConsumptionCoroutine;
+    public bool isWalking = false;
+    public bool isInZeroGrav = false;
     public bool isCrawling = false;
     public bool isBoosting = false;
     public bool isGrabbing = false;
@@ -63,6 +67,7 @@ public class P_StateManager : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 
         currentState.EnterState(this);

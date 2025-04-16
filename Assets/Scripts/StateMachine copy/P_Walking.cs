@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class P_Walking : P_State
 {
-    public float speed = 10f;
+    float speed;
     public float jumpHeight = 0.4f;
     public float gravity = 9.81f;
 
@@ -28,7 +28,9 @@ public class P_Walking : P_State
     {
         player.rb.linearVelocity = Vector3.zero;
         player.rb.isKinematic = true;
-
+        player.isWalking = true;
+        player.characterController.enabled = true;
+        speed = player.moveSpeed;
     }
 
     public override void UpdateState(P_StateManager player)
@@ -58,5 +60,11 @@ public class P_Walking : P_State
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * speed * Time.deltaTime);
+    }
+
+    public override void ExitState(P_StateManager player)
+    {
+        player.isWalking = false;
+        player.characterController.enabled = false;
     }
 }
