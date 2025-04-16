@@ -59,7 +59,7 @@ public class P_ZeroGravityState : P_State
         Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput);
         if (moveDirection != Vector3.zero)
         {
-            player.transform
+            //player.transform
             player.rb.AddRelativeForce(moveDirection * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
         }
         // Drag

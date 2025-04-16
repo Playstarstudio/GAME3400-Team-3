@@ -57,8 +57,6 @@ public class P_GroundedState : P_State
             player.transform.Rotate(0f, 0f, rollInput * player.rotationSpeed * 0.3f * Time.deltaTime, Space.Self);
         }
 
-        AnimTracker(player);
-
         float angle = Vector3.Angle(player.transform.forward, player.mainCamera.forward);
 
         if (!Input.GetMouseButton(0))
@@ -76,14 +74,6 @@ public class P_GroundedState : P_State
 
     private void MoveAlongSurface(P_StateManager player, float horizontalInput, float verticalInput)
     {
-        if(horizontalInput != 0f || verticalInput != 0f)
-        {
-            player.isCrawling = true;
-        }
-        else
-        {
-            player.isCrawling = false;
-        }
         // Get the input
         Vector3 inputDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
 
@@ -141,80 +131,11 @@ public class P_GroundedState : P_State
         player.groundedPlayerRotation = player.transform.rotation;
         player.groundedCameraRotation = player.mainCamera.rotation;
         player.rb.isKinematic = false;
-        player.anim.SetBool("Crawl-Idle", false);
-        ResetAnims(player);
 
-        player.isCrawling = false;
 
         // Reset relative rotation between player and camera
         //player.mainCamera.localRotation = Quaternion.identity;
 
         //Debug.Log(("Exit", player.transform.rotation, player.mainCamera.rotation));
-    }
-
-    private void AnimTracker(P_StateManager player)
-    {
-        int h = Input.GetKey(KeyCode.A) ? -1 : Input.GetKey(KeyCode.D) ? 1 : 0;
-        int v = Input.GetKey(KeyCode.S) ? -1 : Input.GetKey(KeyCode.W) ? 1 : 0;
-        string horizontal = h.ToString();
-        string vertical = v.ToString();
-        string c = horizontal + " " + vertical;
-        //Debug.Log(c);
-        switch (c)
-        {
-            case "-1 -1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Down-Left", true);
-                break;
-            case "-1 0":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Left", true);
-                break;
-            case "-1 1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Up-Left", true);
-                break;
-            case "0 -1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Down", true);
-                break;
-            case "0 0":
-                ResetAnims(player);
-                player.anim.SetBool("Crawl-Idle", true);
-                break;
-            case "0 1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Up", true);
-                break;
-            case "1 -1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Down-Right", true);
-                break;
-            case "1 0":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Right", true);
-                break;
-            case "1 1":
-                ResetAnims(player);
-                player.anim.SetBool("Move-Up-Right", true);
-                break;
-            default:
-                ResetAnims(player);
-                player.anim.SetBool("Crawl-Idle", true);
-                break;
-        }
-    }
-
-    private void ResetAnims(P_StateManager player)
-    {
-        player.anim.SetBool("Move-Up", false);
-        player.anim.SetBool("Move-Up-Right", false);
-        player.anim.SetBool("Move-Right", false);
-        player.anim.SetBool("Move-Down-Right", false);
-        player.anim.SetBool("Move-Down", false);
-        player.anim.SetBool("Move-Down-Left", false);
-        player.anim.SetBool("Move-Left", false);
-        player.anim.SetBool("Move-Up-Left", false);
-        player.anim.SetBool("Crawl-Idle", false);
     }
 }

@@ -41,43 +41,6 @@ public class P_FlyingState : P_State
         bool ctrlHeld = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
         bool spaceHeld = Input.GetKey(KeyCode.Space);
 
-        // Consume air
-        if (player.oxygen > 0f)
-        {
-            if (horizontalInput != 0f)
-            {
-                player.oxygen -= (player.oxygenConsumptionRate * player.boostMult) * Time.deltaTime;
-            }
-            if (verticalInput != 0f)
-            {
-                player.oxygen -= (player.oxygenConsumptionRate * player.boostMult) * Time.deltaTime;
-            }
-            if (ctrlHeld)
-            {
-                player.oxygen -= (player.oxygenConsumptionRate * player.boostMult) * Time.deltaTime;
-            }
-            if (spaceHeld)
-            {
-                player.oxygen -= (player.oxygenConsumptionRate * player.boostMult) * Time.deltaTime;
-            }
-
-            if (horizontalInput != 0f || verticalInput != 0f || ctrlHeld || spaceHeld)
-            {
-                player.isBoosting = true;
-            }
-            else
-            {
-                player.isBoosting = false;
-            }
-
-            
-            player.oxygen = Mathf.Clamp(player.oxygen, 0f, 100f);      // Ensure oxygen stays in bounds
-        }
-        else
-        {
-            Debug.LogError("Oxygen depleted!");
-        }
-
 
         // Rotation (pitch, yaw, roll)
         float pitch = -mouseY * player.rotationSpeed * Time.deltaTime;

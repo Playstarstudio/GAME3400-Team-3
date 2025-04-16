@@ -10,30 +10,27 @@ public class P_StateManager : MonoBehaviour
     public P_State previousState;
     public P_Walking walkingState = new P_Walking();
     public P_GroundedState groundedState = new P_GroundedState();
+    public P_FlyingState flyingState = new P_FlyingState();
+    public P_ZeroGravityState zeroGravState = new P_ZeroGravityState();
     #endregion
 
     #region Components
-    [HideInInspector] public Rigidbody rb;
-    [HideInInspector] public CharacterController characterController;
-    [HideInInspector] public Transform groundedObject;
+    public Rigidbody rb;
+    public CharacterController characterController;
+    public Transform groundedObject;
     public Transform mainCamera;
-    [HideInInspector] public Quaternion groundedPlayerRotation;
-    [HideInInspector] public Quaternion groundedCameraRotation;
-    [HideInInspector] public Animator anim;
-    public GameObject laser;
-    
+    public Quaternion groundedPlayerRotation;
+    public Quaternion groundedCameraRotation;
+    public Animator anim;
+
     public AudioSource breathingAudioSource;
     public AudioSource backgroundMusicAudioSource;
-    public AudioSource crawlingAudioSource;
-    public AudioSource oxygenBoostingAudioSource;
-    public AudioSource grabbingAudioSource;
     public AudioSource otherSoundsAudioSource;
 
     public AudioClip jetPackAirSoundClip;
     public AudioClip[] breathingClips;
     public AudioClip[] backgroundMusicClips;
-    public AudioClip idCardClip, laserCutterClip, sealantSprayClip, oxygenRefillClip,
-            landingClip, crawlingClip, oxygenBoostingClip, grabbingClip, suffocationClip, jumpClip;
+    public AudioClip landingClip, jumpClip;
 
     #endregion
 
@@ -46,17 +43,11 @@ public class P_StateManager : MonoBehaviour
     #endregion
 
     #region Resource Variables
-    public float oxygen = 100f;
-    public float power = 0f;
-    public float oxygenConsumptionRate = 0.2f; // Amount of oxygen to consume per second
     public float boostMult = 0f;
-    private Coroutine oxygenConsumptionCoroutine;
     public bool isWalking = false;
     public bool isInZeroGrav = false;
-    public bool isCrawling = false;
+
     public bool isBoosting = false;
-    public bool isGrabbing = false;
-    private bool isSuffocating = false;
     #endregion
 
     #region UI Elements
@@ -84,25 +75,6 @@ public class P_StateManager : MonoBehaviour
         backgroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
         backgroundMusicAudioSource.loop = false;
         backgroundMusicAudioSource.volume = 0.2f;
-
-
-        crawlingAudioSource = gameObject.AddComponent<AudioSource>();
-        crawlingAudioSource.loop = true;
-        crawlingAudioSource.volume = 0f;
-        crawlingAudioSource.clip = crawlingClip;
-        crawlingAudioSource.Play();
-
-        oxygenBoostingAudioSource = gameObject.AddComponent<AudioSource>();
-        oxygenBoostingAudioSource.loop = true;
-        oxygenBoostingAudioSource.volume = 0f;
-        oxygenBoostingAudioSource.clip = oxygenBoostingClip;
-        oxygenBoostingAudioSource.Play();
-
-        grabbingAudioSource = gameObject.AddComponent<AudioSource>();
-        grabbingAudioSource.loop = true;
-        grabbingAudioSource.volume = 0f;
-        grabbingAudioSource.clip = grabbingClip;
-        grabbingAudioSource.Play();
 
         otherSoundsAudioSource = gameObject.AddComponent<AudioSource>();
         otherSoundsAudioSource.loop = false;
@@ -158,10 +130,13 @@ public class P_StateManager : MonoBehaviour
     /// Public method to set power.
     /// </summary>
     /// <param name="amount">New power value.</param>
+    /// 
+    /*
     public void SetPower(float amount)
     {
         power = Mathf.Clamp(amount, 0f, 100f); // Ensure power stays within 0-100
     }
+    */
 
     
 
@@ -183,15 +158,8 @@ public class P_StateManager : MonoBehaviour
     {
         while (true)
         {
-            if (oxygen < 50f)
-            {
-                backgroundMusicAudioSource.clip = backgroundMusicClips[2];
-            }
-            else
-            {
-                backgroundMusicAudioSource.clip = backgroundMusicClips[Random.Range(0, 2)];
-            }
 
+            backgroundMusicAudioSource.clip = backgroundMusicClips[Random.Range(0, 2)];
             backgroundMusicAudioSource.Play();
 
             while (backgroundMusicAudioSource.isPlaying)
@@ -201,28 +169,6 @@ public class P_StateManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SuffocationSequence()
-    {
-        PlaySound("Suffocation");
-
-        float fadeDuration = 4f;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            if (fadePanel != null)
-            {
-                fadePanel.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration); // Fade in
-            }
-            yield return null;
-        }
-
-        // Load the death scene
-        Cursor.visible = true;
-        SceneManager.LoadScene("Menu-Oxygen-Dead");
-    }
-
 
     public void PlaySound(string soundName)
     {
@@ -230,29 +176,9 @@ public class P_StateManager : MonoBehaviour
 
         switch (soundName)
         {
-            case "IDCard":
-                otherSoundsAudioSource.volume = .3f;
-                clip = idCardClip;
-                break;
-            case "LaserCutter":
-                otherSoundsAudioSource.volume = .15f;
-                clip = laserCutterClip;
-                break;
-            case "SealantSpray":
-                otherSoundsAudioSource.volume = .15f;
-                clip = sealantSprayClip;
-                break;
-            case "OxygenRefill":
-                otherSoundsAudioSource.volume = .3f;
-                clip = oxygenRefillClip;
-                break;
             case "Landing":
                 otherSoundsAudioSource.volume = .3f;
                 clip = landingClip;
-                break;
-            case "Suffocation":
-                otherSoundsAudioSource.volume = .3f;
-                clip = suffocationClip;
                 break;
             case "Jump":
                 otherSoundsAudioSource.volume = .3f;
