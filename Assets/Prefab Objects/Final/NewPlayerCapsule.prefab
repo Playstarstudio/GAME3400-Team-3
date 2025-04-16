@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6146844877481661294}
   m_Layer: 0
   m_Name: NewPlayerCapsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -51.4766, y: 3.2745085, z: -15.441455}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7996897316998982675}
   m_Father: {fileID: 0}
@@ -150,6 +150,7 @@ MonoBehaviour:
   isWalking: 0
   isInZeroGrav: 0
   isBoosting: 0
+  hasSuit: 0
   fadePanel: {fileID: 0}
 --- !u!54 &4674528066840632072
 Rigidbody:
@@ -356,3 +357,4 @@ MonoBehaviour:
   mouseSensitivity: 100
   minPitch: -90
   maxPitch: 90
+  playerBody: {fileID: 141693788791464757}
