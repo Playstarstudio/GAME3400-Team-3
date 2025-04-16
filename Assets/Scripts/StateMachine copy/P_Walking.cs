@@ -14,17 +14,6 @@ public class P_Walking : P_State
 
     Transform transform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void EnterState(P_StateManager player)
     {
@@ -45,6 +34,7 @@ public class P_Walking : P_State
     public override void ExitState(P_StateManager player)
     {
         player.isWalking = false;
+        player.isInZeroGrav = true;
         player.characterController.enabled = false;
     }
 
