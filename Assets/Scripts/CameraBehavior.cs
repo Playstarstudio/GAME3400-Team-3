@@ -6,29 +6,33 @@ public class CameraBehavior : MonoBehaviour
     public float minPitch = -90f;
     public float maxPitch = 90f;
 
-    Transform playerBody;
+    public Transform playerBody;
 
     float pitch;
     void Start()
     {
-     playerBody = transform.parent.transform;   
      Cursor.visible = false;
      Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
+{
+    float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+    float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+    Debug.Log($"Mouse X: {moveX}, Mouse Y: {moveY}");
+
+    if (playerBody)
     {
-        float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-
-        if(playerBody) {
-            playerBody.Rotate(Vector3.up * moveX);
-        }
-        pitch -= moveY;
-        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-        transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+        playerBody.Rotate(Vector3.up * moveX);
+        Debug.Log("Rotating player body");
     }
-    
+
+    pitch -= moveY;
+    pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+    transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+}
+
+
 }
