@@ -16,6 +16,7 @@ public class OpenDoor : MonoBehaviour
 
     void Start()
     {
+        uiObject.SetActive(false);
         playerInRange = false;
         startPosn = startPosition.transform;
         endPosn = endPosition.transform;
