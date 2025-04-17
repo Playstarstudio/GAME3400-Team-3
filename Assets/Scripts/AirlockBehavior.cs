@@ -18,4 +18,12 @@ public class AirlockBehavior : MonoBehaviour
     {
         
     }
+
+    IEnumerator VentSteam() {
+        for(int i = 0; i < ventSteam.Length; i++) {
+            ventSteam[i].SetActive(true);
+            yield return new WaitForSeconds(1);
+            ventSteam[i].SetActive(false);
+        }
+    }
 }
