@@ -51,6 +51,7 @@ public class AirlockBehavior : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         audioSource.volume = 0.5f;
+        audioSource.playOnAwake = false;
         hasVented = false;
     }
 

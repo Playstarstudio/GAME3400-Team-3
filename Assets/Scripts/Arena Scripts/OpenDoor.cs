@@ -36,6 +36,7 @@ public class OpenDoor : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         audioSource.volume = 0.5f;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
