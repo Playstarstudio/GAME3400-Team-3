@@ -29,10 +29,10 @@ public class UpdateScreenText : MonoBehaviour
         }
         if(player != null) {
             if(player.hasSuit) {
-                UpdateText("WARNING: NO OXYGEN AHEAD SPACE SUIT REQUIRED", color.green);
+                UpdateText("WARNING: NO OXYGEN AHEAD SPACE SUIT REQUIRED", Color.green);
             }
             else {
-                UpdateText("WARNING: NO OXYGEN AHEAD SPACE SUIT REQUIRED", color.red);
+                UpdateText("WARNING: NO OXYGEN AHEAD SPACE SUIT REQUIRED", Color.red);
             }
         }
 
