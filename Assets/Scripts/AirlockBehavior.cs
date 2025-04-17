@@ -30,7 +30,9 @@ public class AirlockBehavior : MonoBehaviour
     public float speed = 5f;
     private bool isOpening = false;
     private bool isClosing = false;
+    private bool hasPlayedNoSuitChime = false;
     private bool isInAirLock = false;
+    private bool hasVented = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +50,8 @@ public class AirlockBehavior : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        audioSource.volume = 0.5f;
+        hasVented = false;
     }
 
     // Update is called once per frame
@@ -57,15 +61,34 @@ public class AirlockBehavior : MonoBehaviour
         {
             enterDoor.isOpening = true;
         }
-        OpenExitDoor();
+        if (player.hasSuit && hasVented && isInAirLock)
+        {
+            isOpening = true;
+            isClosing = false;
+        }
+        else
+        {
+            isClosing = true;
+            isOpening = false;
+        }
+            OpenExitDoor();
     }
 
     public IEnumerator VentSteam() {
-        AudioSource.PlayClipAtPoint(airlockClip, player.transform.position);
-        for(int i = 0; i < ventSteam.Length; i++) {
-            ventSteam[i].SetActive(true);
+        if (!hasVented)
+        {
+            AudioSource.PlayClipAtPoint(airlockClip, player.transform.position, 0.5f);
+            for (int i = 0; i < ventSteam.Length; i++)
+            {
+                ventSteam[i].SetActive(true);
+            }
             yield return new WaitForSeconds(1);
-            ventSteam[i].SetActive(false);
+            for (int i = 0; i < ventSteam.Length; i++)
+            {
+                ventSteam[i].SetActive(false);
+            }
+            yield return new WaitForSeconds(1);
+            hasVented = true;
         }
     }
 
@@ -76,6 +99,7 @@ public class AirlockBehavior : MonoBehaviour
             if (!hasPlayedOpenSound)
             {
                 exitDoorAudioSource.PlayOneShot(openingSound);
+                Debug.Log("Played: opening Audio");
                 hasPlayedOpenSound = true;
                 hasPlayedCloseSound = false;
             }
@@ -93,7 +117,9 @@ public class AirlockBehavior : MonoBehaviour
         {
             if (!hasPlayedCloseSound)
             {
+
                 exitDoorAudioSource.PlayOneShot(closingSound);
+                Debug.Log("Played: closing Audio");
                 hasPlayedCloseSound = true;
                 hasPlayedOpenSound = false;
             }
@@ -109,15 +135,20 @@ public class AirlockBehavior : MonoBehaviour
         }
     }
 
-    public void AirLockSequence()
+    public IEnumerator AirLockSequence()
     {
         if(player.hasSuit)
         {
-
+            yield return new WaitForSeconds(0.25f);
+            StartCoroutine(VentSteam());
+            
         }
-        else
+        else if(!hasPlayedNoSuitChime && !player.hasSuit)
         {
+            yield return new WaitForSeconds(0.25f);
             audioSource.PlayOneShot(noSuitChime);
+            Debug.Log("Played: no suit Audio");
+            hasPlayedNoSuitChime = true;
             enterDoor.isOpening = true;
         }
     }
@@ -128,7 +159,7 @@ public class AirlockBehavior : MonoBehaviour
         {
             player = other.gameObject.GetComponent<P_StateManager>();
             isInAirLock = true;
-            AirLockSequence();
+            StartCoroutine(AirLockSequence());
         }
     }
 
@@ -138,6 +169,7 @@ public class AirlockBehavior : MonoBehaviour
         {
            enterDoor.isOpening = false;
            isInAirLock = false;
+            hasPlayedNoSuitChime = false;
         }
     }
 }

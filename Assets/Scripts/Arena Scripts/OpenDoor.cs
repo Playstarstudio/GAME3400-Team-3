@@ -18,6 +18,8 @@ public class OpenDoor : MonoBehaviour
     private AudioSource audioSource;
     private bool hasPlayedOpenSound = false;
     private bool hasPlayedCloseSound = false;
+    private bool wasOpening = false;
+    private bool wasClosing = false;
 
     void Start()
     {
@@ -38,13 +40,34 @@ public class OpenDoor : MonoBehaviour
 
     void Update()
     {
+
+        if (isOpening && !wasOpening)
+        {
+            hasPlayedOpenSound = false;
+            wasOpening = true;
+        }
+        else if (!isOpening)
+        {
+            wasOpening = false;
+        }
+
+
+        if (isClosing && !wasClosing)
+        {
+            hasPlayedCloseSound = false;
+            wasClosing = true;
+        }
+        else if (!isClosing)
+        {
+            wasClosing = false;
+        }
+
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             if (!isOpening)
             {
                 isOpening = true;
                 isClosing = false;
-                hasPlayedOpenSound = false;
             }
         }
 
@@ -53,8 +76,8 @@ public class OpenDoor : MonoBehaviour
             if (!hasPlayedOpenSound)
             {
                 audioSource.PlayOneShot(openingSound);
+                Debug.Log("Played: opening Audio");
                 hasPlayedOpenSound = true;
-                hasPlayedCloseSound = false;
             }
             door.transform.position = Vector3.MoveTowards(
                 door.transform.position,
@@ -66,13 +89,14 @@ public class OpenDoor : MonoBehaviour
                 isOpening = false;
             }
         }
+
         if (isClosing)
         {
             if (!hasPlayedCloseSound)
             {
                 audioSource.PlayOneShot(closingSound);
+                Debug.Log("Played: closing Audio");
                 hasPlayedCloseSound = true;
-                hasPlayedOpenSound = false;
             }
             door.transform.position = Vector3.MoveTowards(
                 door.transform.position,
