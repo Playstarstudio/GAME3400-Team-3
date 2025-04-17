@@ -9,6 +9,8 @@ public class AirlockBehavior : MonoBehaviour
     public BoxCollider airlockTrigger;
     public AudioClip airlockClip;
     public P_StateManager player;
+    public AudioSource audioSource;
+
 
     [Header("Enter Door Settings")]
     public OpenDoor enterDoor;
@@ -28,6 +30,7 @@ public class AirlockBehavior : MonoBehaviour
     public float speed = 5f;
     private bool isOpening = false;
     private bool isClosing = false;
+    private bool isInAirLock = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,11 +42,21 @@ public class AirlockBehavior : MonoBehaviour
         startPosn = startPosition.transform;
         endPosn = endPosition.transform;
         exitDoor.transform.position = startPosn.position;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!player.hasSuit && isInAirLock)
+        {
+            enterDoor.isOpening = true;
+        }
         OpenExitDoor();
     }
 
@@ -104,8 +117,27 @@ public class AirlockBehavior : MonoBehaviour
         }
         else
         {
-            AudioSource.PlayClipAtPoint(noSuitChime, player.transform.position);
+            audioSource.PlayOneShot(noSuitChime);
             enterDoor.isOpening = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            player = other.gameObject.GetComponent<P_StateManager>();
+            isInAirLock = true;
+            AirLockSequence();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+           enterDoor.isOpening = false;
+           isInAirLock = false;
         }
     }
 }

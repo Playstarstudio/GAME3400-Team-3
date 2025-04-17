@@ -21,7 +21,9 @@ public class OpenDoor : MonoBehaviour
 
     void Start()
     {
-        uiObject.SetActive(false);
+        if(uiObject)
+            uiObject.SetActive(false);
+
         playerInRange = false;
         startPosn = startPosition.transform;
         endPosn = endPosition.transform;
@@ -31,6 +33,7 @@ public class OpenDoor : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        audioSource.volume = 0.5f;
     }
 
     void Update()
