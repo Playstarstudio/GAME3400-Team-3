@@ -42,7 +42,7 @@ public class P_ZeroGravityState : P_State
         float pitch = -mouseY * player.rotationSpeed * Time.deltaTime;
         float yaw = mouseX * player.rotationSpeed * Time.deltaTime;
         float roll = rollInput * player.rollSpeed * Time.deltaTime;
-        player.rb.transform.Rotate(pitch, yaw, roll, Space.Self);
+        //player.rb.transform.Rotate(pitch, yaw, roll, Space.Self);
 
 
        
@@ -55,10 +55,11 @@ public class P_ZeroGravityState : P_State
         {
             player.rb.AddRelativeForce(Vector3.up * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
         }
-
+        
         Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput);
         if (moveDirection != Vector3.zero)
         {
+            Debug.Log("MoveDirection: " + moveDirection); 
             //player.transform
             player.rb.AddRelativeForce(moveDirection * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
         }

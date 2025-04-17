@@ -21,12 +21,10 @@ public class CameraBehavior : MonoBehaviour
     float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
     float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-    Debug.Log($"Mouse X: {moveX}, Mouse Y: {moveY}");
 
     if (playerBody)
     {
         playerBody.Rotate(Vector3.up * moveX);
-        Debug.Log("Rotating player body");
     }
 
     pitch -= moveY;
