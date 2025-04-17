@@ -4,7 +4,7 @@ public class P_Walking : P_State
 {
     float speed;
     public float jumpHeight = 0.1f;
-    public float gravity = 10f;
+    public float gravity = 5f;
 
     public float airControl = 10f;
 
