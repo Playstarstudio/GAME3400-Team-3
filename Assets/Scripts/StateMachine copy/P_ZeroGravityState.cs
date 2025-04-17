@@ -2,89 +2,71 @@ using UnityEngine;
 
 public class P_ZeroGravityState : P_State
 {
+    float speed;
+    public float jumpHeight = .3f;
+    public float gravity = 10f;
+
+    public float airControl = 10f;
+
+    Vector3 input;
+    Vector3 moveDirection;
+    CharacterController controller;
+
+    Transform transform;
+
+
     public override void EnterState(P_StateManager player)
     {
-        player.isInZeroGrav = true;
-        player.characterController.enabled = false;
-
-        player.rb.linearDamping = player.drag;
+        player.rb.linearVelocity = Vector3.zero;
+        player.rb.isKinematic = true;
+        player.isWalking = true;
+        player.characterController.enabled = true;
+        speed = player.moveSpeed;
+        controller = player.characterController;
+        transform = player.transform;
     }
-
 
     public override void UpdateState(P_StateManager player)
     {
-        /*TO DO: 
-        WASD = up down left right movement
-        QE = roll left right
-        Mouse movement = pitch/yaw
-        Shift = speed up
-        Space = brake
-        
-        if(PlayerControl.isGrabbing ==true)
-        {
-            player.SwitchState(player.grabbingState);
-        }
-       / */
-
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-        float rollInput = Input.GetKey(KeyCode.Q) ? -1f : Input.GetKey(KeyCode.E) ? 1f : 0f;
-        //bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
-        bool wHeld = Input.GetKey(KeyCode.W);
-        bool ctrlHeld = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-        bool spaceHeld = Input.GetKey(KeyCode.Space);
-
-
-
-        // Rotation (pitch, yaw, roll)
-        float pitch = -mouseY * player.rotationSpeed * Time.deltaTime;
-        float yaw = mouseX * player.rotationSpeed * Time.deltaTime;
-        float roll = rollInput * player.rollSpeed * Time.deltaTime;
-        //player.rb.transform.Rotate(pitch, yaw, roll, Space.Self);
-
-
-       
-        if (ctrlHeld)
-        {
-            player.rb.AddRelativeForce(-Vector3.up * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
-        }
-
-        if (spaceHeld)
-        {
-            player.rb.AddRelativeForce(Vector3.up * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
-        }
-        
-        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput);
-        if (moveDirection != Vector3.zero)
-        {
-            Debug.Log("MoveDirection: " + moveDirection); 
-            //player.transform
-            player.rb.AddRelativeForce(moveDirection * player.acceleration * Time.deltaTime, ForceMode.Acceleration);
-        }
-        // Drag
-        ApplyDrag(player);
-
-
+        Move();
     }
 
     public override void ExitState(P_StateManager player)
     {
-        player.isInZeroGrav = false;
+        player.isWalking = false;
+        player.isInZeroGrav = true;
+        player.characterController.enabled = false;
     }
 
-    private void ApplyDrag(P_StateManager player)
+    private void Move()
     {
-        Vector3 velocity = player.rb.linearVelocity;
-        Vector3 deceleration = -velocity.normalized * player.drag * Time.deltaTime;
 
-        if (deceleration.magnitude > velocity.magnitude)
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        input = transform.right * moveHorizontal + transform.forward * moveVertical;
+        input.Normalize();
+
+        if (controller.isGrounded)
         {
-            deceleration = -velocity;
-        }
+            moveDirection = input;
 
-        player.rb.AddForce(deceleration, ForceMode.VelocityChange);
+            if (Input.GetButton("Jump"))
+            {
+                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+            }
+            else
+            {
+                moveDirection.y = 0.0f;
+            }
+        }
+        else
+        {
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * speed * Time.deltaTime);
     }
 
 
