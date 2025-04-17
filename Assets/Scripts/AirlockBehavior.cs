@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.ProBuilder.Shapes;
 
 public class AirlockBehavior : MonoBehaviour
 {
@@ -7,10 +9,20 @@ public class AirlockBehavior : MonoBehaviour
     public BoxCollider airlockTrigger;
     public AudioClip airlockClip;
     public P_StateManager player;
+
+    [Header("Enter Door Settings")]
+    public OpenDoor enterDoor;
+    public AudioClip noSuitChime;
+
     [Header("Exit Door Settings")]
     [SerializeField] private GameObject exitDoor;
     [SerializeField] private GameObject startPosition;
     [SerializeField] private GameObject endPosition;
+    [SerializeField] private AudioClip openingSound;
+    [SerializeField] private AudioClip closingSound;
+    private AudioSource exitDoorAudioSource;
+    private bool hasPlayedOpenSound = false;
+    private bool hasPlayedCloseSound = false;
     private Transform startPosn;
     private Transform endPosn;
     public float speed = 5f;
@@ -23,12 +35,16 @@ public class AirlockBehavior : MonoBehaviour
         for(int i = 0; i < ventSteam.Length; i++) {
             ventSteam[i].SetActive(false);
         }
+        exitDoorAudioSource = exitDoor.GetComponent<AudioSource>();
+        startPosn = startPosition.transform;
+        endPosn = endPosition.transform;
+        exitDoor.transform.position = startPosn.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        OpenExitDoor();
     }
 
     public IEnumerator VentSteam() {
@@ -40,11 +56,56 @@ public class AirlockBehavior : MonoBehaviour
         }
     }
 
+    public void OpenExitDoor()
+    {
+        if (isOpening)
+        {
+            if (!hasPlayedOpenSound)
+            {
+                exitDoorAudioSource.PlayOneShot(openingSound);
+                hasPlayedOpenSound = true;
+                hasPlayedCloseSound = false;
+            }
+            exitDoor.transform.position = Vector3.MoveTowards(
+                exitDoor.transform.position,
+                endPosn.position,
+                speed * Time.deltaTime
+            );
+            if (exitDoor.transform.position == endPosn.position)
+            {
+                isOpening = false;
+            }
+        }
+        if (isClosing)
+        {
+            if (!hasPlayedCloseSound)
+            {
+                exitDoorAudioSource.PlayOneShot(closingSound);
+                hasPlayedCloseSound = true;
+                hasPlayedOpenSound = false;
+            }
+            exitDoor.transform.position = Vector3.MoveTowards(
+                exitDoor.transform.position,
+                startPosn.position,
+                speed * Time.deltaTime
+            );
+            if (exitDoor.transform.position == startPosn.position)
+            {
+                isClosing = false;
+            }
+        }
+    }
+
     public void AirLockSequence()
     {
         if(player.hasSuit)
         {
 
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(noSuitChime, player.transform.position);
+            enterDoor.isOpening = true;
         }
     }
 }
