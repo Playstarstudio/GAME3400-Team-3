@@ -3,8 +3,8 @@ using UnityEngine;
 public class P_Walking : P_State
 {
     float speed;
-    public float jumpHeight = 0f;
-    public float gravity = 9.81f;
+    public float jumpHeight = 0.1f;
+    public float gravity = 10f;
 
     public float airControl = 10f;
 
