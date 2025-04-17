@@ -6,10 +6,12 @@ public class PickUpSuit : MonoBehaviour
     public GameObject suit;
     public P_StateManager playerManager;
     private bool playerInRange;
+    AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -17,9 +19,10 @@ public class PickUpSuit : MonoBehaviour
     {
         if(playerInRange && Input.GetKeyDown(KeyCode.E)){
             playerManager.hasSuit = true;
+            audioSource.Play();
             Destroy(suit);
             Destroy(uiObject);
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 1);
         }
     }
 
