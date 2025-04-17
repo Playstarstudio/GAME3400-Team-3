@@ -4,7 +4,7 @@ public class PickUpSuit : MonoBehaviour
 {
     public GameObject uiObject;
     public GameObject suit;
-    public P_Manager playerManager;
+    public P_StateManager playerManager;
     private bool playerInRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
